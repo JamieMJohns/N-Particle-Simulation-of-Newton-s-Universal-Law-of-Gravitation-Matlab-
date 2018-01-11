@@ -8,7 +8,7 @@ https://www.youtube.com/watch?v=BL1ZYvghrc0
 
 
 
-List of files in this repository;
+List of files in this repository;<br />
 outline of theory_equations_algorithms.pdf - information about theory and algorithm used in code
 source_code_youtube_videos.m - exact source code for my youtube videos [could be hard to read/interpret]
 universial_gravitation(5_Particles).m - simplified demonstration of algorithm used in source_code_youtube_videos.m
