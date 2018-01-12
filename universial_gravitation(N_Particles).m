@@ -108,17 +108,19 @@ title(sprintf('Time:%.4fseconds',0),'fontsize',15) %add title showing time (for 
 
 k=1:size(p,1); %list of indexes for each planet
 for t=2:T; % for instances (or timesteps) of 2 through to T (t=1 is the already defined initial state)
+    p0=p;%position at initial timestep t-1
+    v0=v;%velocity at initial timestep t-1
     for j=1:size(p,1); % for each particle j
-        pj=repmat(p(j,:),size(p,1)-1,1);  % get position of particle j
+        pj=repmat(p0(j,:),size(p0,1)-1,1);  % get position of particle j
                                           % and represent as matrix of size (N-1)x2
                                           %[column 1=x column 2=y]
-        pk=p(k~=j,:); %get position of all particles that are not j
+        pk=p0(k~=j,:); %get position of all particles that are not j
                       %size=(N-1)x2  [size(pk)=size(pj)]
         massj=repmat(m(j),size(pj)); %get mass j and represent as (N-1)x2 matrix [same size as pj]
         massk=repmat(m(k~=j)',1,2); %get all mass that not j  and represent as (N-1)x2 matrix [same size as pj]
         F=sum(FG(pj,pk,massj,massk),1); %calculate net force                                
-        v(j,:)=v(j,:)+dt.*F./m(j); %calculate velocity (x,y) at current instant (t) for particle j
-        p(j,:)=p(j,:)+dt.*v(j,:); %calculate new position (x,y) for particle j
+        v(j,:)=v0(j,:)+dt.*F./m(j); %calculate velocity (x,y) at current instant (t) for particle j
+        p(j,:)=p0(j,:)+dt.*v(j,:); %calculate new position (x,y) for particle j at current instant t
         %check if new particle j position in boundary$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         % if no, set velocity
         v(j,:)=((p(j,1))>bnd(1))*((p(j,1))<bnd(2)).*((p(j,2))>bnd(3))*((p(j,2))<bnd(4)).*v(j,:); %if particle i
@@ -228,17 +230,19 @@ title(sprintf('Time:%.4fseconds',0),'fontsize',15) %add title showing time (for 
 
 k=1:size(p,1); %list of indexes for each planet
 for t=2:T; % for instances (or timesteps) of 2 through to T (t=1 is the already defined initial state)
+    p0=p;%position at initial timestep t-1
+    v0=v;%velocity at initial timestep t-1    
     for j=1:size(p,1); % for each particle j
-        pj=repmat(p(j,:),size(p,1)-1,1);  % get position of particle j
+        pj=repmat(p0(j,:),size(p0,1)-1,1);  % get position of particle j
                                           % and represent as matrix of size (N-1)x2
                                           %[column 1=x column 2=y]
-        pk=p(k~=j,:); %get position of all particles that are not j
+        pk=p0(k~=j,:); %get position of all particles that are not j
                       %size=(N-1)x2  [size(pk)=size(pj)]
         massj=repmat(m(j),size(pj)); %get mass j and represent as (N-1)x2 matrix [same size as pj]
         massk=repmat(m(k~=j)',1,3); %get all mass that not j  and represent as (N-1)x2 matrix [same size as pj]
         F=sum(FG(pj,pk,massj,massk),1); %calculate net force                                
-        v(j,:)=v(j,:)+dt.*F./m(j); %calculate velocity (x,y) at current instant (t) for particle j
-        p(j,:)=p(j,:)+dt.*v(j,:); %calculate new position (x,y) for particle j
+        v(j,:)=v0(j,:)+dt.*F./m(j); %calculate velocity (x,y) at current instant (t) for particle j
+        p(j,:)=p0(j,:)+dt.*v(j,:); %calculate new position (x,y) for particle j
         %check if new particle j position in boundary$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         % if no, set velocity (inelastic collision)
         v(j,:)=((p(j,1))>bnd(1))*((p(j,1))<bnd(2)).*((p(j,2))>bnd(3))*((p(j,2))<bnd(4)).*((p(j,3))>bnd(5)).*((p(j,3))<bnd(6)).*v(j,:);
