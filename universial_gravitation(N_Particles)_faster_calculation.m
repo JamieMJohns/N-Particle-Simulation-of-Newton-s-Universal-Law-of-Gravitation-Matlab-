@@ -125,8 +125,8 @@ for t=1:T;% for T time steps
                        % output is matrix of size: size(p,1)*size(p,1)*2
                        % ->F1(1,5,1)= force (x-component) exerted on particle 5 by particle 1
                        % ->F1(6,13,2)= force (y-component) exerted on particle 13 by particle 6
-                       % ->sum(F1(:,10,1))=next force exerted on particle 10 (x-component of force);
-                       % ->sum(F1(:,23,2))=next force exerted on particle 23 (y-component of force);                      
+                       % ->sum(F1(:,10,1))=net force exerted on particle 10 (x-component of force);
+                       % ->sum(F1(:,23,2))=net force exerted on particle 23 (y-component of force);                      
         F1(isnan(F1))=0; %convert nan to zeros (in the case of division by (zero in above calculation)
         F=sum(F1,1); %calculate net forces; e.g - F(1,:,1) = net force on each particle (x-component)
                       %e.g-calculate net force; F(1,5,1)=net force (x-compenent) exerted on particle 5
@@ -266,8 +266,8 @@ for t=1:T; % for T time steps
                        % output is matrix of size: size(p,1)*size(p,1)*2
                        % ->F1(1,5,1)= force (x-component) exerted on particle 5 by particle 1
                        % ->F1(6,13,2)= force (y-component) exerted on particle 13 by particle 6
-                       % ->sum(F1(:,10,1))=next force exerted on particle 10 (x-component of force);
-                       % ->sum(F1(:,23,2))=next force exerted on particle 23 (y-component of force);                      
+                       % ->sum(F1(:,10,1))=net force exerted on particle 10 (x-component of force);
+                       % ->sum(F1(:,23,2))=net force exerted on particle 23 (y-component of force);                      
         F1(isnan(F1))=0; %convert nan to zeros (in the case of division by (zero in above calculation)
         F=sum(F1,1); %calculate net forces; e.g - F(1,:,1) = net force on each particle (x-component)
                       %e.g-calculate net force; F(1,5,1)=net force (x-compenent) exerted on particle 5
