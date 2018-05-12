@@ -148,7 +148,7 @@ end
 
 
 
-%% Section 1 - N particle simulation in Two Dimensions
+%% Section 2 - N particle simulation in Three Dimensions
 
 
 close all %close all figure
